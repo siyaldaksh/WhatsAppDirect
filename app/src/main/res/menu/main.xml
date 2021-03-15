@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:checkableBehavior="single" android:visible="true">
+        <item
+            android:id="@+id/nav_rate"
+            android:icon="@drawable/ic_rate_review_white_24dp"
+            android:title="@string/menu_rate"
+            app:showAsAction="ifRoom"/>
+
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/ic_share_white_24dp"
+            android:title="@string/menu_share"
+            app:showAsAction="ifRoom"/>
+        <item
+            android:id="@+id/nav_feedback"
+            android:icon="@drawable/ic_feedback_white_24dp"
+            android:title="@string/menu_feedback"
+            app:showAsAction="ifRoom"/>
+    </group>
+</menu>

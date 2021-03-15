@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "622329861344",
+    "project_id": "easymessage-c25cb",
+    "storage_bucket": "easymessage-c25cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622329861344:android:3a2ccbbe3a223af083ac85",
+        "android_client_info": {
+          "package_name": "com.appbin.easymessage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "622329861344-asdi3hdol1g145bqba4ghnsh17ts8dgl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMmgqbp3wgdRaOjhHs_TowSWjyYbdHIzs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "622329861344-asdi3hdol1g145bqba4ghnsh17ts8dgl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

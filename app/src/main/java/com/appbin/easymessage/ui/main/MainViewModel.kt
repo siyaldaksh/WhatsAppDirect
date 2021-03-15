@@ -1,4 +1,4 @@
-package com.appbin.whatsappdirect.ui.main
+package com.appbin.easymessage.ui.main
 
 import androidx.lifecycle.ViewModel
 

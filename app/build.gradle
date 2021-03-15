@@ -8,11 +8,13 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'androidx.navigation.safeargs'
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "30.0.1"
     defaultConfig {
-        applicationId "com.appbin.whatsappdirect"
+        applicationId "com.appbin.easymessage"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -62,5 +64,8 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_coroutine"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_coroutine"
     implementation 'com.android.support:multidex:1.0.3'
-    implementation 'com.google.android.gms:play-services-ads:19.6.0'
+    implementation 'com.google.android.gms:play-services-ads:19.0.1'
+    implementation 'com.hbb20:ccp:2.4.5'
+    implementation platform('com.google.firebase:firebase-bom:26.7.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 }

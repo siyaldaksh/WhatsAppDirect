@@ -1,4 +1,4 @@
-package com.appbin.whatsappdirect.ui.main
+package com.appbin.easymessage.ui.main
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import com.appbin.whatsappdirect.R
+import com.appbin.easymessage.R
 
 class Main : Fragment() {
 

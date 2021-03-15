@@ -1,4 +1,4 @@
-package com.appbin.whatsappdirect
+package com.appbin.easymessage
 
 import org.junit.Test
 
