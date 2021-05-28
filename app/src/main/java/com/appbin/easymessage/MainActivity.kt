@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         adRequest = AdRequest.Builder().build()
         adView?.loadAd(adRequest)
 
+
         val adLayout : LinearLayout = findViewById(R.id.nativeAdContainer)
         val adMobAd = AdMobAds(this, adLayout)
         adMobAd.refreshAd(Constants.NATIVE_AD)
@@ -174,4 +175,6 @@ class MainActivity : AppCompatActivity() {
             adView?.resume()
         }
     }
+
+
 }

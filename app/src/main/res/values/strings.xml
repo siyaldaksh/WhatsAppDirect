@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Easy Message</string>
-    <string name="adId">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="adId">ca-app-pub-2458975203964000/4516894505</string>
+    <!--<string name="adId">ca-app-pub-3940256099942544/2247696110</string>-->
     <string name="menu_share">Share
     </string>
 
@@ -9,7 +10,7 @@
 
     <string name="menu_rate">Rate and Review
     </string>
-    <string name="share_text" translatable="false">Download this to send messages directly to whatsapp without saving number.
+    <string name="share_text" translatable="false">Download this to send messages directly to youmessenger app without saving number.
         Click the below link\nhttp://play.google.com/store/apps/details?id=com.appbin.easymessage</string>
 
     <string name="email_id" translatable="false">appbin18@gmail.com</string>
