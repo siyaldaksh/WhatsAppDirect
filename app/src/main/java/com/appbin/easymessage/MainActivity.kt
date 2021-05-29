@@ -4,59 +4,82 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
 import android.net.Uri
-import com.google.android.material.textfield.TextInputLayout
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.AdRequest
 import com.appbin.easymessage.ui.main.AdMobAds
 import com.appbin.easymessage.ui.main.Constants
 import com.google.android.gms.ads.MobileAds
-import com.hbb20.CountryCodePicker
-import android.view.MenuInflater
-import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.core.widget.doOnTextChanged
+import androidx.databinding.DataBindingUtil
+import com.appbin.easymessage.databinding.ActivityMainBinding
+import kotlinx.coroutines.*
 
 
 class MainActivity : AppCompatActivity() {
 
     var adView: AdView? = null
     var adRequest: AdRequest? = null
+    private var viewModelJob = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+   // private lateinit var mHandler: Handler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        MobileAds.initialize(this) {}
-
+        val binding : ActivityMainBinding = DataBindingUtil.setContentView(this,R.layout.activity_main)
         adView = findViewById(R.id.banner_ad) as AdView
-        adRequest = AdRequest.Builder().build()
-        adView?.loadAd(adRequest)
+
+        uiScope.launch {
+
+            withContext(Dispatchers.IO) {
+                MobileAds.initialize(this@MainActivity) {}
+
+                val adMobAd = AdMobAds(this@MainActivity, binding.nativeAdContainer)
+                adMobAd.refreshAd(Constants.NATIVE_AD)
 
 
-        val adLayout : LinearLayout = findViewById(R.id.nativeAdContainer)
-        val adMobAd = AdMobAds(this, adLayout)
-        adMobAd.refreshAd(Constants.NATIVE_AD)
+                adRequest = AdRequest.Builder().build()
 
+            }
+            adView?.loadAd(adRequest)
+            adView?.visibility = View.VISIBLE
+        }
 
+       /* val loadingLayout : LinearLayout = findViewById(R.id.loading)
 
-        val send = findViewById<Button>(R.id.sendButton)
+        mHandler = Handler()
+        mHandler.postDelayed(Runnable {
+            *//*if (loadingAd.isLoaded) {
+                try {
+                    loadingAd.show()
+                } catch (e: Exception) {
+
+                }
+            }*//*
+            loadingLayout.visibility = View.GONE
+            supportActionBar?.show()
+        },3000)*/
+
+        /* val send = findViewById<Button>(R.id.sendButton)
         val number = findViewById<EditText>(R.id.enterNumber)
         val message = findViewById<EditText>(R.id.enterMessage)
         val countryCode = findViewById<CountryCodePicker>(R.id.countryCodeHolder)
         val clearNumber = findViewById<ImageView>(R.id.clearNumber)
-        val clearMessage = findViewById<ImageView>(R.id.clearMessage)
+        val clearMessage = findViewById<ImageView>(R.id.clearMessage)*/
 
-        send.setOnClickListener {
-            val numberWithCountryCode = countryCode.selectedCountryCodeWithPlus+number?.text.toString().trim()
-            val messageString = message?.text.toString().trim()
+        binding.sendButton.setOnClickListener {
+            val numberWithCountryCode = binding.countryCodeHolder.selectedCountryCodeWithPlus+
+                    binding.enterNumber.text.toString().trim()
+            val messageString = binding.enterMessage.text.toString().trim()
 
 
-            if(number?.text.toString().trim().isEmpty()){
+            if(binding.enterNumber.text.toString().trim().isEmpty()){
                 Toast.makeText(this, "Please Enter Number...",Toast.LENGTH_SHORT).show()
             }else {
                 val uri =
@@ -68,23 +91,23 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        number?.doOnTextChanged { text, start, before, count ->
-            clearNumber.visibility = View.VISIBLE
+        binding.enterNumber.doOnTextChanged { text, start, before, count ->
+            binding.clearNumber.visibility = View.VISIBLE
 
         }
-        message?.doOnTextChanged { text, start, before, count ->
-            clearMessage.visibility = View.VISIBLE
+        binding.enterMessage.doOnTextChanged { text, start, before, count ->
+            binding.clearMessage.visibility = View.VISIBLE
 
         }
 
-        clearNumber.setOnClickListener {
-            number?.text?.clear()
-            clearNumber.visibility = View.GONE
+        binding.clearNumber.setOnClickListener {
+            binding.enterNumber.text.clear()
+            binding.clearNumber.visibility = View.GONE
         }
 
-        clearMessage.setOnClickListener {
-            message?.text?.clear()
-            clearMessage.visibility = View.GONE
+        binding.enterMessage.setOnClickListener {
+            binding.enterMessage.text?.clear()
+            binding.clearNumber.visibility = View.GONE
         }
 
     }
@@ -160,6 +183,7 @@ class MainActivity : AppCompatActivity() {
         if(adView!=null){
             adView?.destroy()
         }
+        viewModelJob.cancel()
     }
 
     override fun onPause() {
